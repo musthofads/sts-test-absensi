@@ -1,2 +1,2 @@
 web: gunicorn web_absensi.wsgi
-release: python manage.py migrate
+release: python web_absensi/manage.py migrate
