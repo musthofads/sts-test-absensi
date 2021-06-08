@@ -1,0 +1,9 @@
+dj-database-url==0.5.0
+Django==3.2.4
+django-cors-headers==3.7.0
+djangorestframework==3.12.4
+djangorestframework-simplejwt==4.7.1
+psycopg2==2.8.6
+requests==2.25.1
+responses==0.13.3
+whitenoise==5.2.0
