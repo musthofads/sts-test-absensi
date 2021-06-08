@@ -1,0 +1,64 @@
+{% extends "../base_form.html" %}
+
+
+{% block title %}
+    <h1 class="mt-4">Karyawan</h1>
+{% endblock title %}
+
+{% block title_card %} Form Karyawan {% endblock %}
+
+{% block form %}
+
+<form action="" method="post" autocomplete="off">
+    {% csrf_token %}
+    {% for message in messages %}
+    <div class="alert alert-warning" role="alert">
+        {{message}}
+    </div>
+    {% endfor %}
+    <div class="form-group">
+        <input type="text" class="form-control item" id="email" name="email" placeholder="Email" required>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control item" id="username" name="username" placeholder="Username" required>
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control item" id="password" name="password" placeholder="Password" required>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+          <input type="text" class="form-control item" id="first_name" name="first_name" placeholder="Nama Depan" required>
+        </div>
+        <div class="col">
+          <input type="text" class="form-control item" id="last_name" name="last_name" placeholder="Nama Belakang">
+        </div>
+    </div>
+    <div class="form-group">
+        <select class="custom-select" id="divisi" name="divisi" required>
+            <option selected>-- Pilih Divisi --</option>
+            <option value="Information Technology">Information Technology</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <select class="custom-select" id="jabatan" name="jabatan" required>
+            <option selected>-- Pilih Jabatan --</option>
+            <option value="Frontend Developer">Frontend Developer</option>
+            <option value="Backend Developer">Backend Developer</option>
+            <option value="Python Developer">Python Developer</option>
+            <option value="PHP Developer">PHP Developer</option>
+            <option value="UI/UX Design">UI/UX Design</option>
+        </select>
+    </div>
+    <div class="form-group" required>
+        <input type="text" class="form-control item" id="no_telepon" name="no_telepon" placeholder="No Telepon">
+    </div>
+    <div class="input-group">
+        <a href="{% url 'karyawan_list' %}" class="btn btn-secondary mr-2">
+            <i class="fas fa-stream"></i> Batal
+        </a>
+        <button type="submit" class="btn btn-success mr-2">
+            <i class="fas fa-database"></i> Simpan
+        </button>
+    </div>
+</form>
+{% endblock form %}

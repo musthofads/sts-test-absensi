@@ -1,0 +1,18 @@
+Metadata-Version: 2.1
+Name: absensi
+Version: 0.0.1
+Summary: Aplikasi Absensi
+Home-page: UNKNOWN
+Author: Musthofa DS
+Author-email: musthofads@gmail.com
+License: UNKNOWN
+Description: Aplikasi Absensi
+        ================
+Keywords: django project absensi
+Platform: UNKNOWN
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Software Development
+Provides-Extra: dev

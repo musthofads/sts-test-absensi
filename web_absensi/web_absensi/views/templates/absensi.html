@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<!-- Modal Checkout -->
+<div class="modal fade" id="modalCheckout" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h5 class="modal-title text-light">CHECK OUT</h5>
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Apakah anda yakin akan check out sekarang ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        <a href="{% url 'checkout' %}">
+            <button type="button" class="btn btn-danger">Check Out</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-9">
+			<h1 class="mt-4">ABSENSI</h1>
+		</div>
+ 		{% if karyawan.checkin %}
+			<div class="col-md-3 mt-4 text-light bg-danger" id="status_blmkerja" style="border-radius: 50px; text-align: center; padding:6px; height: 50%;">
+				<h5 class="">Belum Bekerja</h5>
+			</div>
+        {% else %}
+			<div class="col-md-3 mt-4 text-light bg-success" id="status_kerja" style="border-radius: 50px; text-align: center; padding:6px; height: 50%;">
+				<h5 class="">Selamat Bekerja</h5>
+			</div>
+        {% endif %}
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-md-2">
+			<h5>Nama</h5>
+		</div>
+		<div class="col-md-5">
+			<h5>: {{ karyawan.nama }}</h5>
+		</div>
+		<div class="col-md-2">
+			<h5>Shift</h5>
+		</div>
+		<div class="col-md-3">
+			<h5>: Normal Shift</h5>
+		</div>
+
+		<div class="col-md-2">
+			<h5>Divisi</h5>
+		</div>
+		<div class="col-md-5">
+			<h5>: {{ karyawan.divisi }}</h5>
+		</div>
+		<div class="col-md-2">
+			<h5>Jam Kerja</h5>
+		</div>
+		<div class="col-md-3">
+			<h5>: 08:00 - 17:00</h5>
+		</div>
+
+		<div class="col-md-2">
+			<h5>Jabatan</h5>
+		</div>
+		<div class="col-md-5">
+			<h5>: {{ karyawan.jabatan }}</h5>
+		</div>
+	</div>
+	<hr>
+	<center>
+		<div id="tanggal"></div>
+		<!-- jam -->
+		<div id="watch" class="mb-3"></div>
+ 		{% if karyawan.checkin %}
+			<div id="btnin">
+				<a href="{% url 'checkin' %}" class="btn btn-success btn-lg">
+		            <i class="fas fa-clock"></i> <h4>CHECK IN</h4>
+		        </a>
+			</div>
+        {% else %}
+			<div id="btnout">
+				<a class="btn btn-danger btn-lg" data-toggle="modal" data-target="#modalCheckout" style="cursor: pointer;">
+		            <i class="fas fa-clock"></i> <h4>CHECK OUT</h4>
+		        </a>
+			</div>
+        {% endif %}
+	</center>
+</div>
+{% endblock %}
+
+
+{% block script %}
+<script type="text/javascript">
+	$(document).ready(function() {
+	});
+</script>
+{% endblock %}

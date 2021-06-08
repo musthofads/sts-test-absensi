@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="static/css/style_auth.css">
+</head>
+<body>
+    <div class="registration-form">
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="form-group mb-4">
+                <center>
+                    <h2>Register</h2><hr>
+                </center>
+                {% for message in messages %}
+                <div class="col-md-12">
+                    <div class="alert alert-warning" role="alert">
+                        {{message}}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control item" id="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control item" id="username" name="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control item" id="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="row">
+                <div class="col">
+                  <input type="text" class="form-control item" id="first_name" name="first_name" placeholder="Nama Depan" required>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control item" id="last_name" name="last_name" placeholder="Nama Belakang">
+                </div>
+            </div>
+            <div class="form-group">
+                <select class="custom-select" id="divisi" name="divisi" required>
+                    <option selected>-- Pilih Divisi --</option>
+                    <option value="Information Technology">Information Technology</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="custom-select" id="jabatan" name="jabatan" required>
+                    <option selected>-- Pilih Jabatan --</option>
+                    <option value="Frontend Developer">Frontend Developer</option>
+                    <option value="Backend Developer">Backend Developer</option>
+                    <option value="Python Developer">Python Developer</option>
+                    <option value="PHP Developer">PHP Developer</option>
+                    <option value="UI/UX Design">UI/UX Design</option>
+                </select>
+            </div>
+            <div class="form-group" required>
+                <input type="text" class="form-control item" id="no_telepon" name="no_telepon" placeholder="No Telepon">
+            </div>
+            <div class="form-group">
+                <!-- <button type="submit" class="btn btn-block create-account">Daftar Akun</button> -->
+                <input class="btn btn-primary btn-block py-2 font-weight-bold" type="submit" value="Daftar Akun">
+            </div>
+            <div class="form-group mt-3">
+                <label>Sudah punya Akun ?</label>
+                <a href="{% url 'login' %}">
+                    Login sekarang !
+                </a>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

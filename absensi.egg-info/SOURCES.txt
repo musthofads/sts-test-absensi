@@ -1,0 +1,8 @@
+README.rst
+setup.py
+absensi.egg-info/PKG-INFO
+absensi.egg-info/SOURCES.txt
+absensi.egg-info/dependency_links.txt
+absensi.egg-info/not-zip-safe
+absensi.egg-info/requires.txt
+absensi.egg-info/top_level.txt

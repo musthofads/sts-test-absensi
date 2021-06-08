@@ -1,0 +1,206 @@
+{% load static %}
+{% csrf_token %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>MDS</title>
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+
+        <!-- https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css -->
+        <link rel="stylesheet" href="{% static 'css/datatables/bootstrap.css' %}">
+        <!-- https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css -->
+        <link rel="stylesheet" href="{% static 'css/datatables/dataTables.bootstrap4.min.css' %}">
+        <!-- https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.min.css -->
+        <link rel="stylesheet" href="{% static 'css/datatables/responsive.bootstrap4.min.css' %}">
+
+        <script src="{% static 'js/font-awesome/5.15.1/js/all.min.js' %}" crossorigin="anonymous"></script>
+        <script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
+        <script>
+            $(document).ready(function(){
+              $(".preloader").fadeOut();
+            })
+        </script>
+
+        <style type="text/css">
+            .preloader {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              z-index: 9999;
+              background-color: #fff;
+            }
+            .preloader .loading {
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%,-50%);
+              font: 14px arial;
+            }
+
+            .modal {
+               position: fixed;
+               top: 110px;
+               bottom: 0;
+               left: 0;
+               z-index: 10040;
+               overflow: auto;
+               overflow-y: auto;
+            }
+
+            #tanggal {
+              overflow: show;
+              margin: auto;
+              font-size: 2vw;
+            }
+
+            #watch {
+              overflow: show;
+              margin: auto;
+              font-size: 4vw;
+            }
+        </style>
+    </head>
+
+
+    <!-- Modal Logout -->
+    <div class="modal fade" id="modalLogout" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-dark">
+            <h5 class="modal-title text-light">LOGOUT</h5>
+            <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Apakah anda yakin akan keluar ?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            <a href="{% url 'logout' %}">
+                <button type="button" class="btn btn-primary">Logout</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <body class="sb-nav-fixed">
+        <div class="preloader">
+          <div class="loading">
+            <div class="d-flex justify-content-center">
+              <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <a class="navbar-brand" href="{% url 'home' %}">MDS Company</a>
+            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-1 my-2 my-md-0">
+                {% if user.is_authenticated %}
+                    <span class="text-light">{{ user.get_full_name }}</span>
+                {% endif %}
+            </div>
+            <!-- Navbar-->
+            <ul class="navbar-nav ml-auto ml-md-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown"  style="margin-top: 12px;">
+                        <a class="dropdown-item" data-toggle="modal" data-target="#modalLogout" style="cursor: pointer;">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <a class="nav-link" href="{% url 'home' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
+                                Home
+                            </a>
+                            <!-- <div class="sb-sidenav-menu-heading">Addons</div> -->
+                            {% if user.is_superuser %}
+                                <a class="nav-link" href="{% url 'karyawan_list' %}">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                    Data Karyawan
+                                </a>
+                            {% else %}
+                                <a class="nav-link" href="{% url 'absensi' %}">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-clock"></i></div>
+                                    Absensi
+                                </a>
+                            {% endif %}
+                            <a class="nav-link" href="{% url 'log_absensi' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
+                                Log Absensi
+                            </a>
+                            <!-- <a class="nav-link" href="tables.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Tables
+                            </a> -->
+                        </div>
+                    </div>
+                    <!-- <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        Start Bootstrap
+                    </div> -->
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+
+                        {% block title %}{% endblock %}
+
+                        <div class="row">
+                            <div class="col-md-12" role="main">
+                              {% block content %}{% endblock %}
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; <script>document.write(new Date().getFullYear());</script></div>
+                            <div>
+                                <!-- <a href="#">Privacy Policy</a> -->
+                                <!-- &middot; -->
+                                <!-- <a href="#">Terms &amp; Conditions</a> -->
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="{% static 'js/jquery-3.5.1.slim.min.js' %}" crossorigin="anonymous"></script>
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}" crossorigin="anonymous"></script>
+        <script src="{% static 'js/scripts.js' %}"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script> -->
+        <!-- <script src="assets/demo/chart-area-demo.js"></script> -->
+        <!-- <script src="assets/demo/chart-bar-demo.js"></script> -->
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="{% static 'js/datatables.js' %}"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.7/js/responsive.bootstrap4.min.js"></script>
+
+        {% block script %}{% endblock %}
+
+    </body>
+</html>

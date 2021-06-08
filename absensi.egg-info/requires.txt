@@ -1,0 +1,12 @@
+django
+djangorestframework
+djangorestframework_simplejwt
+django-cors-headers
+dj-database-url
+requests
+responses
+psycopg2
+whitenoise
+
+[dev]
+pytest

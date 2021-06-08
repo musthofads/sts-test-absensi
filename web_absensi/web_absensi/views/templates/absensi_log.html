@@ -1,0 +1,37 @@
+{% extends "base_list.html" %}
+
+{% block title %}
+    <h1 class="mt-4">Absensi</h1>
+{% endblock title %}
+
+{% block title_card %} Data Absensi {% endblock %}
+
+{% block thead %}
+<thead>
+    <tr>
+        <th>Tanggal</th>
+        <th>Nama</th>
+        <th>Absen In</th>
+        <th>Absen Out</th>
+        <th>Lama Kerja</th>
+        <th>Jabatan</th>
+        <th>Divisi</th>
+    </tr>
+</thead>
+{% endblock thead %}
+
+{% block tbody %}
+<tbody>
+{% for karyawan in karyawan_list %}
+    <tr>
+        <td>{{karyawan.tanggal}}</td>
+        <td>{{karyawan.first_name}} {{karyawan.last_name}}</td>
+        <td align="center">{{karyawan.jam_masuk}}</td>
+        <td align="center">{{karyawan.jam_keluar}}</td>
+        <td align="center">{{karyawan.lama_kerja}}</td>
+        <td>{{karyawan.jabatan}}</td>
+        <td>{{karyawan.divisi}}</td>
+    </tr>
+{% endfor %}
+</tbody>
+{% endblock tbody %}

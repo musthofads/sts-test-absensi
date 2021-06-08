@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+<!-- TITLE -->
+{% block title %}{% endblock %}
+
+{% block content %}
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-edit mr-1"></i>
+        {% block title_card %}{% endblock %}
+    </div>
+    <div class="card-body">
+        <!-- FORM -->
+        {% block form %}{% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}{% endblock %}

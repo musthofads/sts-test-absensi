@@ -1,0 +1,53 @@
+{% extends "../base_list.html" %}
+
+{% block title %}
+    <h1 class="mt-4">Karyawan</h1>
+{% endblock title %}
+
+{% block button %}
+<div class="card mb-2" style="border-style:none;">
+    <div class="input-group">
+        <a href="{% url 'karyawan_insert' %}" class="btn btn-success mr-1">
+            <i class="fas fa-plus"></i> Tambah
+        </a>
+    </div>
+</div>
+{% endblock button %}
+
+{% block title_card %} Data Karyawan {% endblock %}
+
+{% block thead %}
+<thead>
+    <tr>
+        <th>No Karyawan</th>
+        <th>Nama</th>
+        <th>Divisi</th>
+        <th>Jabatan</th>
+        <th>Status</th>
+        <th>Aksi</th>
+    </tr>
+</thead>
+{% endblock thead %}
+
+{% block tbody %}
+<tbody>
+{% for karyawan in karyawan_list %}
+    <tr>
+        <td>{{karyawan.no_karyawan}}</td>
+        <td>{{karyawan.first_name}} {{karyawan.last_name}}</td>
+        <td>{{karyawan.divisi}}</td>
+        <td>{{karyawan.jabatan}}</td>
+        {% if karyawan.is_active == True %}
+            <td>Aktif</td>
+        {% else %}
+            <td>Non Aktif</td>
+        {% endif %}
+        <td>
+            <a href="karyawan/update/{{ karyawan.id }}"><span class="text-info"><i class="fas fa-edit"></i></span></a>  
+            <a href="karyawan/delete/{{ karyawan.id }}"><span class="text-danger"><i class="fas fa-trash-alt"></i></span></a>  
+        </td>
+
+    </tr>
+{% endfor %}
+</tbody>
+{% endblock tbody %}
