@@ -17,9 +17,9 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 #DataFlair #Django #Static files
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 #--------------------------------------------------
-STATIC_ROOT = os.path.join(BASE_DIR, 'web_absensi/static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'web_absensi/static')
 # STATICFILES_DIRS = [
 #         os.path.join(BASE_DIR, 'web_absensi/static'),
 # ]
